@@ -1,0 +1,30 @@
+#cloud-config
+network:
+  version: 2
+  ethernets:
+    enp0s25:
+      dhcp4:true    
+autoinstall:
+  apt:
+    preserve_sources_list: false
+    primary:
+    - arches: [amd64, i386]
+      uri: http://archive.ubuntu.com/ubuntu
+    - arches: [default]
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  identity: {hostname: placeholder, password: $6$RBR0Dd/vKUR438YV$oNQLOoRnTNl9pN0XbMSQcFTGxTbbz1GZ4ITQZCiKPiDvlF6gyOwEXyAYa7ea0awkq.Ljhg8gYCpkshfXb8zQ5., realname: test, username: test}
+  keyboard: {layout: us, toggle: null, variant: ''}
+  locale: en_US
+  ssh:
+   allow-pw: true
+   authorized-keys: []
+   install-server: true   
+  storage:
+    layout:
+      name: direct
+  user-data:
+    runcmd:
+      - sudo dhclient
+      - wget ftp://test:quauy78@10.237.146.34/configuration.sh
+      - sudo bash configuration.sh
+  version: 1
