@@ -48,9 +48,15 @@ sudo mount $(sudo fdisk -l |sed -e '/Disk \/dev\/loop/,+5d' | grep Disk | awk '!
 ```
 
 After the drive is mounted it can run the script available on the disk. 
+```bash
+sudo /media/DUT_scripts/./configuration.sh
+```
 
 ### File transfer script execution
+Next up is the [cloud-init-ftp.yaml](https://github.com/Filip3Kx/ubuntu-provision/edit/main/cloud-init-ftp.yaml) file that offers fully unnatend provisioning because you don't have to keep the pendrive inserted which can cause some boot order alterations. We will pull the script from an outside server. In this scenario i'm using FTP but any other should work just fine
 
+```bash
+```
 ### Adding interactive parts
 
 ## Provisioning script
