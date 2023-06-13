@@ -38,9 +38,16 @@ Go into Auto Install Plugin and set it up using one of the files described below
 Here is a collection of files that i wrote that can help with basic scenarios of provisioning a fresh ubuntu install.
 
 ### Local script execution
+The file [cloud-init-local.yaml](https://github.com/Filip3Kx/ubuntu-provision/edit/main/cloud-init-local.yaml) offers you the most basic configuration of cloud init that will automaticaly configure network, disks, user information, and set up an ssh server.
+
+There is also a runcmd block that will run every command inside after the first boot of a freshly installed OS.
+
+This is a one liner that will parse the result of `fdisk -l` and will mount the disk specified in `awk"/DataTraveler/"`. **Be sure to replace "DataTraveler" with your own device name.** 
 ```bash
 sudo mount $(sudo fdisk -l |sed -e '/Disk \/dev\/loop/,+5d' | grep Disk | awk '! /Disk identifier/' | awk '! /Disklabel/' | awk 'NR % 2 == 0 {printf "%s %s\n", p, $0; next} {p=$0}' | awk "/DataTraveler/" | awk '{print $2}' | awk '{sub(/.$/,"")}1')1 /media
 ```
+
+After the drive is mounted it can run the script available on the disk. 
 
 ### File transfer script execution
 
