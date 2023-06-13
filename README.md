@@ -38,7 +38,7 @@ Go into Auto Install Plugin and set it up using one of the files described below
 Here is a collection of files that i wrote that can help with basic scenarios of provisioning a fresh ubuntu install.
 
 ### Local script execution
-The file [cloud-init-local.yaml](https://github.com/Filip3Kx/ubuntu-provision/edit/main/cloud-init-local.yaml) offers you the most basic configuration of cloud init that will automaticaly configure network, disks, user information, and set up an ssh server.
+The file [cloud-init-local.yaml](https://github.com/Filip3Kx/ubuntu-provision/blob/main/cloud-init-local.yaml) offers you the most basic configuration of cloud init that will automaticaly configure network, disks, user information, and set up an ssh server.
 
 There is also a runcmd block that will run every command inside after the first boot of a freshly installed OS.
 
@@ -53,10 +53,17 @@ sudo /media/DUT_scripts/./configuration.sh
 ```
 
 ### File transfer script execution
-Next up is the [cloud-init-ftp.yaml](https://github.com/Filip3Kx/ubuntu-provision/edit/main/cloud-init-ftp.yaml) file that offers fully unnatend provisioning because you don't have to keep the pendrive inserted which can cause some boot order alterations. We will pull the script from an outside server. In this scenario i'm using FTP but any other should work just fine
+Next up is the [cloud-init-ftp.yaml](https://github.com/Filip3Kx/ubuntu-provision/blob/main/cloud-init-ftp.yaml) file that offers fully unnatend provisioning because you don't have to keep the pendrive inserted which can cause some boot order alterations. We will pull the script from an outside server. In this scenario i'm using FTP but any other should work just fine
 
 ```bash
+sudo bash configuration.sh
 ```
 ### Adding interactive parts
+If your server instances are unique and you need to enter some parts by hand you can just add the `interactive-sections:` block into the file and specify which parts are meant to be interactive. Example in [cloud-init-interactive.yaml](https://github.com/Filip3Kx/ubuntu-provision/blob/main/cloud-init-interactive.yaml)
 
 ## Provisioning script
+As you can see all of these files end in running a script. [provision.sh](https://github.com/Filip3Kx/ubuntu-provision/blob/main/provision.sh) is a sample script that will 
+- configure the OS proxy 
+- Download packages 
+- Configure services
+- etc.
