@@ -25,6 +25,6 @@ autoinstall:
   user-data:
     runcmd:
       - sudo dhclient
-      - wget ftp://test:quauy78@10.237.146.34/configuration.sh
+      - wget ftp://test:test@1.1.1.1/configuration.sh
       - sudo bash configuration.sh
   version: 1
